@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f766e">
+  <title>My Health App — Personal Wellness</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-icon">✚</span> My Health App</a>
+    <span class="secure-label">● Private account-based records</span>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">YOUR PERSONAL WELLNESS SPACE</p>
+        <h1>Health, organized.<br><span>One day at a time.</span></h1>
+        <p class="hero-copy">Sign in to save your wellness notes securely and access them again later.</p>
+      </div>
+      <div class="hero-mark" aria-hidden="true">✚</div>
+    </section>
+
+    <section id="setup-warning" class="notice warning hidden">
+      <strong>One-time setup needed</strong>
+      <p>Add your Supabase Project URL and publishable/anon key in <code>config.js</code>, then run <code>schema.sql</code> in your Supabase SQL Editor. Do not put a service-role key in this website.</p>
+    </section>
+
+    <section id="auth-panel" class="panel auth-panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">ACCOUNT</p><h2>Welcome back</h2></div>
+        <span class="pill">Secure sign-in</span>
+      </div>
+      <div class="tabs">
+        <button id="tab-login" class="tab active" type="button">Sign in</button>
+        <button id="tab-signup" class="tab" type="button">Create account</button>
+      </div>
+      <form id="auth-form">
+        <label for="email">Email address</label>
+        <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" minlength="6" placeholder="At least 6 characters" required>
+        <button id="auth-submit" class="primary full" type="submit">Sign in</button>
+        <p id="auth-message" class="message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="app-panel" class="hidden">
+      <div class="welcome-row">
+        <div><p class="eyebrow">YOUR DASHBOARD</p><h2>Wellness overview</h2><p id="user-email" class="muted"></p></div>
+        <button id="signout" class="secondary" type="button">Sign out</button>
+      </div>
+      <div class="dashboard-grid">
+        <section class="panel">
+          <p class="eyebrow">NEW ENTRY</p><h3>Save a health note</h3>
+          <form id="record-form">
+            <label for="record-date">Date</label>
+            <input id="record-date" type="date" required>
+            <label for="record-type">Entry type</label>
+            <select id="record-type">
+              <option value="Wellness note">Wellness note</option>
+              <option value="Symptoms to discuss">Symptoms to discuss</option>
+              <option value="Medication note">Medication note</option>
+              <option value="Appointment note">Appointment note</option>
+              <option value="Activity">Activity</option>
+            </select>
+            <label for="record-title">Title</label>
+            <input id="record-title" type="text" maxlength="120" placeholder="e.g. Questions for my doctor" required>
+            <label for="record-content">Notes</label>
+            <textarea id="record-content" rows="5" maxlength="5000" placeholder="Write a personal note..." required></textarea>
+            <button class="primary full" type="submit">Save to database</button>
+            <p id="record-message" class="message" role="status"></p>
+          </form>
+        </section>
+        <section class="panel records-panel">
+          <div class="records-heading"><div><p class="eyebrow">SAVED IN SUPABASE</p><h3>Your saved entries</h3></div><button id="refresh-records" class="secondary" type="button">Refresh</button></div>
+          <div id="records-list" class="records-list"><div class="empty-state">Sign in to load your saved records.</div></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="disclaimer">
+      <strong>Important:</strong> This is a personal note organizer, not a medical diagnosis service. Do not use it for emergencies or as a substitute for a healthcare professional. Avoid storing highly sensitive medical details until you have reviewed your privacy, legal, and security requirements.
+    </section>
+  </main>
+  <footer>My Health App <span>•</span> Personal wellness organizer</footer>
+</body>
+</html>
